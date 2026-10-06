@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User, Briefcase, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { UserRole } from '../../types/auth.types';
 
 export const RegisterForm: React.FC = () => {
   const { register, loading, error } = useAuth();
+  const navigate = useNavigate();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +22,14 @@ export const RegisterForm: React.FC = () => {
       return;
     }
     setPasswordError('');
-    await register({ email, password, fullName, role });
+    const result = await register({ email, password, fullName, role });
+    if ((result as any)?.type?.endsWith('fulfilled')) {
+      if (role === 'seller') {
+        navigate('/seller');
+      } else {
+        navigate('/dashboard');
+      }
+    }
   };
 
   return (

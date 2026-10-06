@@ -19,7 +19,23 @@ export const errorHandler = (
     return;
   }
 
-  const statusCode = err.statusCode || (err.message && err.message.includes('Forbidden') ? 403 : err.message && err.message.includes('Unauthorized') ? 401 : 500);
+  let statusCode = err.statusCode;
+  if (!statusCode) {
+    const msg = (err.message || '').toLowerCase();
+    if (msg.includes('already') || msg.includes('exists') || msg.includes('duplicate')) {
+      statusCode = 409;
+    } else if (msg.includes('unauthorized') || msg.includes('invalid credentials') || msg.includes('jwt')) {
+      statusCode = 401;
+    } else if (msg.includes('forbidden') || msg.includes('permission')) {
+      statusCode = 403;
+    } else if (msg.includes('not found')) {
+      statusCode = 404;
+    } else if (msg.includes('rate limit') || msg.includes('validation') || msg.includes('invalid') || msg.includes('password')) {
+      statusCode = 400;
+    } else {
+      statusCode = 500;
+    }
+  }
   const message = err.message || 'Internal Server Error';
 
   res.status(statusCode).json({

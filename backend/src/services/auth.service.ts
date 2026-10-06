@@ -21,7 +21,12 @@ export class AuthService {
     if (!error && authData?.user) {
       userId = authData.user.id;
     } else {
-      // Fallback to regular signUp (works with anon key)
+      const errMsg = (error?.message || '').toLowerCase();
+      if (errMsg.includes('already') || errMsg.includes('registered') || errMsg.includes('exists')) {
+        throw new Error('An account with this email address already exists. Please sign in instead.');
+      }
+
+      // Fallback to regular signUp
       const signUpRes = await supabaseAdmin.auth.signUp({
         email: data.email,
         password: data.password,
@@ -34,6 +39,10 @@ export class AuthService {
       });
 
       if (signUpRes.error || !signUpRes.data?.user) {
+        const signMsg = (signUpRes.error?.message || '').toLowerCase();
+        if (signMsg.includes('already') || signMsg.includes('registered') || signMsg.includes('exists') || signMsg.includes('rate limit')) {
+          throw new Error('An account with this email address already exists. Please sign in instead.');
+        }
         throw new Error(signUpRes.error?.message || error?.message || 'Registration failed');
       }
       userId = signUpRes.data.user.id;
@@ -50,13 +59,27 @@ export class AuthService {
       console.warn('Profile creation note (may be handled by trigger):', profileErr);
     }
 
+    // Auto-login to obtain session token
+    let token = '';
+    try {
+      const { data: sessionData } = await supabaseAdmin.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+      if (sessionData?.session) {
+        token = sessionData.session.access_token;
+      }
+    } catch {
+      // Continue even if immediate token generation fails
+    }
+
     return {
       user: {
         id: userId,
         email: userEmail,
         role: userRole,
       },
-      token: '',
+      token,
     };
   }
 

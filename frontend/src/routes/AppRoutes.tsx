@@ -34,6 +34,22 @@ import { NotFoundPage } from '../pages/common/NotFoundPage';
 export const AppRoutes: React.FC = () => {
   return (
     <Routes>
+      {/* Auth Routes - Top priority matching */}
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      </Route>
+
+      {/* Admin Portal Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<RoleRoute allowedRoles={['admin']} />}>
+          <Route element={<AdminLayout />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Route>
+        </Route>
+      </Route>
+
       {/* Customer & Public Storefront */}
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
@@ -58,24 +74,8 @@ export const AppRoutes: React.FC = () => {
           </Route>
         </Route>
 
-        {/* 404 within storefront */}
+        {/* 404 Catch-All at the bottom */}
         <Route path="*" element={<NotFoundPage />} />
-      </Route>
-
-      {/* Auth Routes */}
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      </Route>
-
-      {/* Admin Portal Routes */}
-      <Route element={<ProtectedRoute />}>
-        <Route element={<RoleRoute allowedRoles={['admin']} />}>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Route>
-        </Route>
       </Route>
     </Routes>
   );
