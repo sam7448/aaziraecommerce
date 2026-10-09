@@ -1,5 +1,20 @@
 import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
 
+const candidatePaths = [
+  path.resolve(__dirname, '../../.env'),
+  path.resolve(__dirname, '../.env'),
+  path.resolve(process.cwd(), 'backend/.env'),
+  path.resolve(process.cwd(), '.env'),
+];
+
+for (const p of candidatePaths) {
+  if (fs.existsSync(p)) {
+    dotenv.config({ path: p });
+    break;
+  }
+}
 dotenv.config();
 
 export const config = {

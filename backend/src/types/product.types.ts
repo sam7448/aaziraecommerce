@@ -36,7 +36,7 @@ export interface ProductFilterQuery {
   search?: string;
   categoryId?: string;
   sellerId?: string;
-  status?: ProductStatus;
+  status?: ProductStatus | 'all';
   minPrice?: number;
   maxPrice?: number;
   sortBy?: 'price_asc' | 'price_desc' | 'newest' | 'rating';

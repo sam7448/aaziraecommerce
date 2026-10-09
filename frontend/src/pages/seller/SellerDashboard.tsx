@@ -29,6 +29,7 @@ export const SellerDashboard: React.FC = () => {
     status: 'active' as const,
   });
   const [formError, setFormError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   // Quick inventory update state
@@ -39,9 +40,18 @@ export const SellerDashboard: React.FC = () => {
     setLoading(true);
     try {
       const [prodRes, catRes, orderRes] = await Promise.all([
-        productService.getProducts({ sellerId: user?.id, limit: 100 }),
-        productService.getCategories(),
-        orderService.getSellerOrders(),
+        productService.getProducts({ sellerId: user?.id, limit: 100 }).catch((e) => {
+          console.warn('Error loading products:', e);
+          return { products: [], total: 0 };
+        }),
+        productService.getCategories().catch((e) => {
+          console.warn('Error loading categories:', e);
+          return [];
+        }),
+        orderService.getSellerOrders().catch((e) => {
+          console.warn('Error loading seller orders:', e);
+          return [];
+        }),
       ]);
       setProducts(prodRes.products || []);
       setCategories(catRes || []);
@@ -68,15 +78,15 @@ export const SellerDashboard: React.FC = () => {
     setFormError('');
     try {
       await productService.createProduct({
-        name: newProduct.name,
-        sku: newProduct.sku,
-        categoryId: newProduct.categoryId || undefined,
+        name: newProduct.name.trim(),
+        sku: newProduct.sku.trim(),
+        categoryId: newProduct.categoryId ? newProduct.categoryId : undefined,
         price: Number(newProduct.price),
         discountPrice: newProduct.discountPrice ? Number(newProduct.discountPrice) : undefined,
-        description: newProduct.description,
+        description: newProduct.description.trim(),
         status: newProduct.status,
         initialStock: Number(newProduct.initialStock),
-        images: newProduct.imageUrl ? [{ storagePath: newProduct.imageUrl, isPrimary: true }] : [],
+        images: newProduct.imageUrl.trim() ? [{ storagePath: newProduct.imageUrl.trim(), isPrimary: true }] : [],
       });
       setShowAddModal(false);
       setNewProduct({
@@ -90,6 +100,9 @@ export const SellerDashboard: React.FC = () => {
         imageUrl: '',
         status: 'active',
       });
+      setSuccessMessage('Product created successfully and published to store catalog!');
+      setActiveTab('products');
+      setTimeout(() => setSuccessMessage(''), 5000);
       await loadSellerData();
     } catch (err: any) {
       setFormError(err.response?.data?.message || err.message || 'Failed to create product.');
@@ -169,6 +182,14 @@ export const SellerDashboard: React.FC = () => {
           <Plus className="w-4 h-4" /> Add Product Listing
         </button>
       </div>
+
+      {/* Success Notification */}
+      {successMessage && (
+        <div className="flex items-center gap-3 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-sm font-semibold shadow-sm animate-fade-in">
+          <Check className="w-5 h-5 text-emerald-600 flex-shrink-0" />
+          <span>{successMessage}</span>
+        </div>
+      )}
 
       {/* Navigation Tabs */}
       <div className="flex border-b border-slate-200 gap-6 text-sm font-semibold">

@@ -21,10 +21,22 @@ export const authenticate = async (
       return;
     }
 
+    let role = user.user_metadata?.role;
+    if (!role || role === 'customer') {
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+      if (profile?.role) {
+        role = profile.role;
+      }
+    }
+
     req.user = {
       id: user.id,
       email: user.email || '',
-      role: (user.user_metadata?.role as any) || 'customer',
+      role: (role as any) || 'customer',
     };
 
     next();

@@ -12,9 +12,9 @@ export class ProductRepository {
       .from('products')
       .select('*, product_images(*), inventory(*)', { count: 'exact' });
 
-    if (filter.status) {
+    if (filter.status && filter.status !== 'all') {
       query = query.eq('status', filter.status);
-    } else {
+    } else if (!filter.status && !filter.sellerId) {
       query = query.eq('status', 'active');
     }
 
@@ -85,7 +85,8 @@ export class ProductRepository {
   }
 
   async create(sellerId: string, dto: CreateProductDTO): Promise<Product> {
-    const slug = dto.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now().toString().slice(-4);
+    const randomSuffix = Math.random().toString(36).substring(2, 6);
+    const slug = dto.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + Date.now().toString().slice(-4) + randomSuffix;
 
     const { data: product, error } = await supabaseAdmin
       .from('products')
@@ -98,32 +99,65 @@ export class ProductRepository {
         description: dto.description || null,
         price: dto.price,
         discount_price: dto.discountPrice || null,
-        status: dto.status || 'draft',
+        status: dto.status || 'active',
       })
       .select()
       .single();
 
-    if (error) throw error;
+    if (error) {
+      if (error.message.includes('unique') || error.code === '23505') {
+        if (error.message.includes('sku')) {
+          throw new Error(`A product with SKU "${dto.sku}" already exists. Please use a unique SKU.`);
+        }
+      }
+      throw error;
+    }
+
+    const initialQuantity = dto.initialStock !== undefined ? dto.initialStock : 0;
 
     // Create inventory record
-    await supabaseAdmin.from('inventory').insert({
+    const { error: invError } = await supabaseAdmin.from('inventory').insert({
       product_id: product.id,
-      quantity: dto.initialStock !== undefined ? dto.initialStock : 0,
+      quantity: initialQuantity,
+      reserved_quantity: 0,
+      low_stock_threshold: 5,
     });
+    if (invError) {
+      console.warn('Inventory record warning:', invError.message);
+    }
+
+    // Create initial inbound movement for auditing
+    if (initialQuantity > 0) {
+      await supabaseAdmin.from('inventory_movements').insert({
+        product_id: product.id,
+        created_by: sellerId,
+        type: 'inbound',
+        quantity_change: initialQuantity,
+        notes: 'Initial stock received on listing creation',
+      });
+    }
 
     // Create initial images if provided
     if (dto.images && dto.images.length > 0) {
-      await supabaseAdmin.from('product_images').insert(
-        dto.images.map((img, idx) => ({
+      const validImages = dto.images
+        .filter((img) => img.storagePath && img.storagePath.trim() !== '')
+        .map((img, idx) => ({
           product_id: product.id,
-          storage_path: img.storagePath,
+          storage_path: img.storagePath.trim(),
           is_primary: img.isPrimary !== undefined ? img.isPrimary : idx === 0,
           sort_order: img.sortOrder !== undefined ? img.sortOrder : idx,
-        }))
-      );
+        }));
+
+      if (validImages.length > 0) {
+        const { error: imgError } = await supabaseAdmin.from('product_images').insert(validImages);
+        if (imgError) {
+          console.warn('Product image insert warning:', imgError.message);
+        }
+      }
     }
 
-    return (await this.findById(product.id))!;
+    const created = await this.findById(product.id);
+    return created || this.mapToEntity(product);
   }
 
   async update(id: string, dto: UpdateProductDTO): Promise<Product> {
