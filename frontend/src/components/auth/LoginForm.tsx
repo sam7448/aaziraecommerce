@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, AlertCircle, Loader2 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
 export const LoginForm: React.FC = () => {
-  const { login, loading, error } = useAuth();
+  const { login, loading, error, isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      if (user.role === 'seller') {
+        navigate('/seller', { replace: true });
+      } else if (user.role === 'admin') {
+        navigate('/admin', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
+    }
+  }, [isAuthenticated, user, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await login({ email, password });
+    const result = await login({ email, password });
+    if ((result as any)?.type?.endsWith('fulfilled')) {
+      const loggedUser = (result as any)?.payload?.user;
+      if (loggedUser?.role === 'seller') {
+        navigate('/seller', { replace: true });
+      } else if (loggedUser?.role === 'admin') {
+        navigate('/admin', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
+    }
   };
 
   return (
