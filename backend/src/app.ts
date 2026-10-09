@@ -9,8 +9,13 @@ import { notFoundHandler } from './middleware/not-found.middleware';
 
 const app = express();
 
-// Security Headers
-app.use(helmet());
+// Security Headers (disable HTML CSP on API server to prevent blocking client scripts/devtools)
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginResourcePolicy: false,
+  })
+);
 
 // CORS configuration
 app.use(

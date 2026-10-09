@@ -52,6 +52,7 @@ export const RegisterForm: React.FC = () => {
           <input
             id="fullName"
             type="text"
+            autoComplete="name"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             placeholder="John Doe"
@@ -71,6 +72,7 @@ export const RegisterForm: React.FC = () => {
           <input
             id="reg-email"
             type="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
@@ -90,6 +92,7 @@ export const RegisterForm: React.FC = () => {
           <input
             id="reg-password"
             type={showPassword ? 'text' : 'password'}
+            autoComplete="new-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Min. 8 characters"
@@ -117,6 +120,7 @@ export const RegisterForm: React.FC = () => {
           <input
             id="reg-confirm-password"
             type={showPassword ? 'text' : 'password'}
+            autoComplete="new-password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Repeat your password"
