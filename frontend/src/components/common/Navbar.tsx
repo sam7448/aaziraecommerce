@@ -181,9 +181,10 @@ export const Navbar: React.FC = () => {
 
                     <div className="border-t border-slate-100 mt-1 pt-1">
                       <button
-                        onClick={() => {
+                        onClick={async () => {
                           setUserMenuOpen(false);
-                          logout();
+                          await logout();
+                          navigate('/login');
                         }}
                         className="w-full flex items-center gap-2.5 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50"
                       >

@@ -3,13 +3,13 @@ import { LoginCredentials, RegisterData, AuthResponse, User } from '../types/aut
 
 export const authService = {
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>('/auth/login', credentials);
-    return response.data;
+    const response = await api.post<{ success: boolean; data: AuthResponse }>('/auth/login', credentials);
+    return response.data.data; // unwrap: { success, data: { user, token } }
   },
 
   async register(data: RegisterData): Promise<AuthResponse> {
-    const response = await api.post<AuthResponse>('/auth/register', data);
-    return response.data;
+    const response = await api.post<{ success: boolean; data: AuthResponse }>('/auth/register', data);
+    return response.data.data;
   },
 
   async getProfile(): Promise<User> {

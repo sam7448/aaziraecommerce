@@ -42,10 +42,13 @@ export const registerUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('auth/logout', async () => {
+  // Always clear local storage first so the UI clears immediately
+  storage.clear();
   try {
+    // Best-effort server-side token revocation; failure doesn't block logout
     await authService.logout();
-  } finally {
-    storage.clear();
+  } catch {
+    // Ignore errors — the user is still logged out locally
   }
 });
 
@@ -89,7 +92,20 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload as string;
       })
+      .addCase(logoutUser.pending, (state) => {
+        // Clear auth state immediately on logout start — don't wait for server
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+        state.error = null;
+      })
       .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.token = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(logoutUser.rejected, (state) => {
+        // Even if server revocation fails, clear local state
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;

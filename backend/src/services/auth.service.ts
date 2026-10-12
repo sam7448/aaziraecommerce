@@ -93,11 +93,27 @@ export class AuthService {
       throw new Error(error?.message || 'Invalid credentials');
     }
 
+    // Resolve role: prefer user_metadata, then fall back to profiles table
+    let role = data.user.user_metadata?.role;
+    const fullName: string = data.user.user_metadata?.full_name || '';
+
+    if (!role || role === 'customer') {
+      const { data: profile } = await supabaseAdmin
+        .from('profiles')
+        .select('role')
+        .eq('id', data.user.id)
+        .single();
+      if (profile?.role) {
+        role = profile.role;
+      }
+    }
+
     return {
       user: {
         id: data.user.id,
         email: data.user.email!,
-        role: (data.user.user_metadata?.role as any) || 'customer',
+        fullName,
+        role: role || 'customer',
       },
       token: data.session.access_token,
     };
