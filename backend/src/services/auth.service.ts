@@ -1,4 +1,4 @@
-import { supabaseAdmin } from '../config/supabase';
+import { supabaseAdmin, createAuthClient } from '../config/supabase';
 import { userRepository } from '../repositories/user.repository';
 import { LoginCredentials, RegisterData, AuthResult, UserProfile } from '../types/auth.types';
 
@@ -26,8 +26,9 @@ export class AuthService {
         throw new Error('An account with this email address already exists. Please sign in instead.');
       }
 
-      // Fallback to regular signUp
-      const signUpRes = await supabaseAdmin.auth.signUp({
+      // Fallback to regular signUp using isolated auth client
+      const authClient = createAuthClient();
+      const signUpRes = await authClient.auth.signUp({
         email: data.email,
         password: data.password,
         options: {
@@ -59,10 +60,11 @@ export class AuthService {
       console.warn('Profile creation note (may be handled by trigger):', profileErr);
     }
 
-    // Auto-login to obtain session token
+    // Auto-login to obtain session token using isolated auth client
     let token = '';
     try {
-      const { data: sessionData } = await supabaseAdmin.auth.signInWithPassword({
+      const authClient = createAuthClient();
+      const { data: sessionData } = await authClient.auth.signInWithPassword({
         email: data.email,
         password: data.password,
       });
@@ -84,7 +86,8 @@ export class AuthService {
   }
 
   async login(credentials: LoginCredentials): Promise<any> {
-    const { data, error } = await supabaseAdmin.auth.signInWithPassword({
+    const authClient = createAuthClient();
+    const { data, error } = await authClient.auth.signInWithPassword({
       email: credentials.email,
       password: credentials.password,
     });

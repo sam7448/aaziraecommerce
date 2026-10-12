@@ -88,17 +88,20 @@ export class ProductRepository {
     const randomSuffix = Math.random().toString(36).substring(2, 6);
     const slug = dto.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-' + Date.now().toString().slice(-4) + randomSuffix;
 
+    const cleanedSku = (dto.sku || '').trim() || ('SKU-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substring(2, 6).toUpperCase());
+    const cleanedCategoryId = (dto.categoryId && typeof dto.categoryId === 'string' && dto.categoryId.trim() !== '') ? dto.categoryId.trim() : null;
+
     const { data: product, error } = await supabaseAdmin
       .from('products')
       .insert({
         seller_id: sellerId,
-        category_id: dto.categoryId || null,
-        name: dto.name,
+        category_id: cleanedCategoryId,
+        name: dto.name.trim(),
         slug,
-        sku: dto.sku,
-        description: dto.description || null,
-        price: dto.price,
-        discount_price: dto.discountPrice || null,
+        sku: cleanedSku,
+        description: dto.description ? dto.description.trim() : null,
+        price: Number(dto.price),
+        discount_price: (dto.discountPrice !== undefined && dto.discountPrice !== null && Number(dto.discountPrice) > 0) ? Number(dto.discountPrice) : null,
         status: dto.status || 'active',
       })
       .select()
