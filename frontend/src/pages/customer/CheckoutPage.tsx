@@ -4,6 +4,8 @@ import { MapPin, CreditCard, ShieldCheck, AlertCircle } from 'lucide-react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { orderService } from '../../services/order.service';
+import { paymentService } from '../../services/payment.service';
+import { env } from '../../config/env';
 import { ShippingAddress } from '../../types/order.types';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -49,11 +51,64 @@ export const CheckoutPage: React.FC = () => {
     setError(null);
 
     try {
-      const order = await orderService.checkout(address, paymentMethod);
-      navigate(`/order-success/${order.orderNumber}`);
+      if (paymentMethod === 'card' || paymentMethod === 'upi') {
+        // Razorpay Online Payment Flow
+        if (!(window as any).Razorpay) {
+          throw new Error('Razorpay payment gateway failed to load. Please check your internet connection.');
+        }
+
+        const rzpOrder = await paymentService.createOrder();
+
+        const options = {
+          key: rzpOrder.keyId || env.razorpayKeyId,
+          amount: rzpOrder.amount,
+          currency: rzpOrder.currency || 'INR',
+          name: 'NovaMarket',
+          description: `Order Payment (${cart?.items?.length || 1} items)`,
+          order_id: rzpOrder.orderId,
+          prefill: {
+            name: address.recipientName,
+            email: user?.email || '',
+            contact: address.phone || '',
+          },
+          theme: {
+            color: '#4f46e5',
+          },
+          modal: {
+            ondismiss: function () {
+              setSubmitting(false);
+            },
+          },
+          handler: async function (response: any) {
+            try {
+              setSubmitting(true);
+              const order = await paymentService.verifyPayment({
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature,
+                shippingAddress: address,
+              });
+              navigate(`/order-success/${order.orderNumber}`);
+            } catch (verifyErr: any) {
+              setError(verifyErr.response?.data?.message || verifyErr.message || 'Payment verification failed.');
+              setSubmitting(false);
+            }
+          },
+        };
+
+        const razorpayInstance = new (window as any).Razorpay(options);
+        razorpayInstance.on('payment.failed', function (resp: any) {
+          setError(resp.error?.description || 'Payment failed. Please try again.');
+          setSubmitting(false);
+        });
+        razorpayInstance.open();
+      } else {
+        // Cash on Delivery Flow
+        const order = await orderService.checkout(address, 'cod');
+        navigate(`/order-success/${order.orderNumber}`);
+      }
     } catch (err: any) {
       setError(err.response?.data?.message || err.message || 'Checkout failed. Please try again.');
-    } finally {
       setSubmitting(false);
     }
   };
@@ -201,8 +256,8 @@ export const CheckoutPage: React.FC = () => {
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
                   <div>
-                    <p className="text-sm font-bold text-slate-800">Credit / Debit Card</p>
-                    <p className="text-xs text-slate-500">Secure card checkout via Stripe / Supabase</p>
+                    <p className="text-sm font-bold text-slate-800">Credit / Debit Card (Razorpay)</p>
+                    <p className="text-xs text-slate-500">Visa, Mastercard, RuPay, Amex via Razorpay</p>
                   </div>
                 </div>
                 <span className="text-xs font-semibold text-indigo-600">Instant</span>
@@ -225,8 +280,8 @@ export const CheckoutPage: React.FC = () => {
                     className="text-indigo-600 focus:ring-indigo-500"
                   />
                   <div>
-                    <p className="text-sm font-bold text-slate-800">UPI / QR Code</p>
-                    <p className="text-xs text-slate-500">Google Pay, PhonePe, Paytm, BHIM</p>
+                    <p className="text-sm font-bold text-slate-800">UPI / QR Code (Razorpay)</p>
+                    <p className="text-xs text-slate-500">Google Pay, PhonePe, Paytm, BHIM via Razorpay</p>
                   </div>
                 </div>
                 <span className="text-xs font-semibold text-indigo-600">Instant</span>

@@ -12,13 +12,16 @@ export class OrderRepository {
     shippingSnapshot: ShippingAddressSnapshot;
     items: { productId: string; sellerId: string; priceSnapshot: number; quantity: number }[];
     paymentMethod: string;
+    orderStatus?: OrderStatus;
+    providerPaymentId?: string;
+    paymentStatus?: 'initiated' | 'processing' | 'completed' | 'failed' | 'refunded';
   }): Promise<Order> {
     const { data: order, error: orderError } = await supabaseAdmin
       .from('orders')
       .insert({
         customer_id: params.customerId,
         order_number: params.orderNumber,
-        status: 'pending',
+        status: params.orderStatus || 'pending',
         subtotal: params.subtotal,
         tax: params.tax,
         shipping: params.shipping,
@@ -48,9 +51,10 @@ export class OrderRepository {
     // Create payment entry
     await supabaseAdmin.from('payments').insert({
       order_id: order.id,
+      provider_payment_id: params.providerPaymentId || null,
       method: params.paymentMethod,
       amount: params.total,
-      status: 'initiated',
+      status: params.paymentStatus || 'initiated',
     });
 
     return (await this.findById(order.id))!;
