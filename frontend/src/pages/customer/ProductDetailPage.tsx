@@ -198,7 +198,7 @@ export const ProductDetailPage: React.FC = () => {
             {hasDiscount && (
               <>
                 <span className="text-base text-slate-400 line-through">${product.price.toFixed(2)}</span>
-                <span className="text-xs font-bold text-rose-600 bg-rose-100 px-2 py-0.5 rounded-full">
+                <span className="text-xs font-bold text-slate-950 bg-[#FFE08B] border border-[#F2D070] px-2.5 py-0.5 rounded-full shadow-xs">
                   Save ${(product.price - product.discountPrice!).toFixed(2)}
                 </span>
               </>
@@ -247,14 +247,14 @@ export const ProductDetailPage: React.FC = () => {
               <button
                 onClick={handleAddToCart}
                 disabled={isOutOfStock}
-                className="flex-1 py-3.5 px-6 rounded-xl font-bold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 py-3.5 px-6 rounded-xl font-black bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 shadow-md shadow-amber-200/60 border border-[#F2D070] flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
-                <ShoppingBag className="w-5 h-5" /> Add to Cart
+                <ShoppingBag className="w-5 h-5 text-slate-950" /> Add to Cart
               </button>
               <button
                 onClick={handleBuyNow}
                 disabled={isOutOfStock}
-                className="flex-1 py-3.5 px-6 rounded-xl font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 py-3.5 px-6 rounded-xl font-bold bg-slate-900 hover:bg-slate-800 text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 Buy Now
               </button>
@@ -263,18 +263,18 @@ export const ProductDetailPage: React.FC = () => {
 
           {/* Delivery & Warranty perks */}
           <div className="grid grid-cols-3 gap-3 pt-6 border-t border-slate-100 text-center text-xs text-slate-600">
-            <div className="p-3 bg-white border border-slate-100 rounded-xl space-y-1">
-              <Truck className="w-5 h-5 mx-auto text-indigo-600" />
+            <div className="p-3 bg-white border border-slate-200/80 rounded-xl space-y-1">
+              <Truck className="w-5 h-5 mx-auto text-amber-700" />
               <p className="font-semibold text-slate-800">Fast Delivery</p>
               <p className="text-[11px] text-slate-400">2-4 business days</p>
             </div>
-            <div className="p-3 bg-white border border-slate-100 rounded-xl space-y-1">
-              <RotateCcw className="w-5 h-5 mx-auto text-indigo-600" />
+            <div className="p-3 bg-white border border-slate-200/80 rounded-xl space-y-1">
+              <RotateCcw className="w-5 h-5 mx-auto text-amber-700" />
               <p className="font-semibold text-slate-800">30-Day Returns</p>
               <p className="text-[11px] text-slate-400">Easy refunds</p>
             </div>
-            <div className="p-3 bg-white border border-slate-100 rounded-xl space-y-1">
-              <ShieldCheck className="w-5 h-5 mx-auto text-indigo-600" />
+            <div className="p-3 bg-white border border-slate-200/80 rounded-xl space-y-1">
+              <ShieldCheck className="w-5 h-5 mx-auto text-amber-700" />
               <p className="font-semibold text-slate-800">Warranty</p>
               <p className="text-[11px] text-slate-400">1-Year guaranteed</p>
             </div>

@@ -104,7 +104,7 @@ export const CustomerProfilePage: React.FC = () => {
           onClick={() => setActiveTab('profile')}
           className={`pb-3 flex items-center gap-2 border-b-2 transition-colors ${
             activeTab === 'profile'
-              ? 'border-indigo-600 text-indigo-600'
+              ? 'border-[#FFE08B] text-slate-950 font-bold'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -114,7 +114,7 @@ export const CustomerProfilePage: React.FC = () => {
           onClick={() => setActiveTab('addresses')}
           className={`pb-3 flex items-center gap-2 border-b-2 transition-colors ${
             activeTab === 'addresses'
-              ? 'border-indigo-600 text-indigo-600'
+              ? 'border-[#FFE08B] text-slate-950 font-bold'
               : 'border-transparent text-slate-500 hover:text-slate-800'
           }`}
         >
@@ -123,14 +123,14 @@ export const CustomerProfilePage: React.FC = () => {
       </div>
 
       {activeTab === 'profile' ? (
-        <form onSubmit={handleSaveProfile} className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-sm space-y-6">
+        <form onSubmit={handleSaveProfile} className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-sm space-y-6">
           <div className="flex items-center gap-4 pb-6 border-b border-slate-100">
-            <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-indigo-500 to-violet-500 text-white flex items-center justify-center text-xl font-bold">
+            <div className="w-16 h-16 rounded-full bg-[#FFE08B] text-slate-950 border border-[#F2D070] flex items-center justify-center text-xl font-black shadow-xs">
               {fullName ? fullName[0].toUpperCase() : user?.email ? user.email[0].toUpperCase() : 'U'}
             </div>
             <div>
               <h2 className="text-lg font-bold text-slate-900">{fullName || user?.email || 'User Profile'}</h2>
-              <span className="text-xs uppercase font-semibold px-2 py-0.5 rounded bg-indigo-50 text-indigo-700">
+              <span className="text-xs uppercase font-bold px-2 py-0.5 rounded bg-[#FFE08B] text-slate-950 border border-[#F2D070]">
                 {user?.role || 'Customer'}
               </span>
             </div>
@@ -144,7 +144,7 @@ export const CustomerProfilePage: React.FC = () => {
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Your full name"
-                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B] focus:outline-none"
               />
             </div>
 
@@ -165,7 +165,7 @@ export const CustomerProfilePage: React.FC = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="e.g. +1 234 567 8900"
-                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                className="w-full px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B] focus:outline-none"
               />
             </div>
 
@@ -189,7 +189,7 @@ export const CustomerProfilePage: React.FC = () => {
           <div className="pt-4 border-t border-slate-100 flex justify-end">
             <button
               type="submit"
-              className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition-all shadow-sm"
+              className="px-6 py-2.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] rounded-xl text-sm font-bold transition-all shadow-sm hover:shadow"
             >
               Save Changes
             </button>
@@ -201,14 +201,14 @@ export const CustomerProfilePage: React.FC = () => {
             <h2 className="text-lg font-bold text-slate-900">Saved Addresses</h2>
             <button
               onClick={() => setShowAddAddress(!showAddAddress)}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-xl transition-all shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 text-xs font-bold border border-[#F2D070] rounded-xl transition-all shadow-sm"
             >
-              <Plus className="w-4 h-4" /> Add New Address
+              <Plus className="w-4 h-4 text-slate-950" /> Add New Address
             </button>
           </div>
 
           {showAddAddress && (
-            <form onSubmit={handleAddAddress} className="bg-white rounded-2xl border border-indigo-100 p-6 shadow-md space-y-4">
+            <form onSubmit={handleAddAddress} className="bg-white rounded-2xl border-2 border-[#FFE08B] p-6 shadow-md space-y-4">
               <h3 className="text-sm font-bold text-slate-900">New Address</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
@@ -217,7 +217,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="Recipient Name"
                   value={newAddr.recipientName}
                   onChange={(e) => setNewAddr({ ...newAddr, recipientName: e.target.value })}
-                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
                 <input
                   type="tel"
@@ -225,7 +225,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="Phone Number"
                   value={newAddr.phone}
                   onChange={(e) => setNewAddr({ ...newAddr, phone: e.target.value })}
-                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
                 <input
                   type="text"
@@ -233,7 +233,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="Street Address"
                   value={newAddr.addressLine1}
                   onChange={(e) => setNewAddr({ ...newAddr, addressLine1: e.target.value })}
-                  className="sm:col-span-2 px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="sm:col-span-2 px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
                 <input
                   type="text"
@@ -241,7 +241,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="City"
                   value={newAddr.city}
                   onChange={(e) => setNewAddr({ ...newAddr, city: e.target.value })}
-                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
                 <input
                   type="text"
@@ -249,7 +249,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="State"
                   value={newAddr.state}
                   onChange={(e) => setNewAddr({ ...newAddr, state: e.target.value })}
-                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
                 <input
                   type="text"
@@ -257,7 +257,7 @@ export const CustomerProfilePage: React.FC = () => {
                   placeholder="Postal Code"
                   value={newAddr.postalCode}
                   onChange={(e) => setNewAddr({ ...newAddr, postalCode: e.target.value })}
-                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl"
+                  className="px-3.5 py-2 text-sm bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FFE08B] focus:outline-none"
                 />
               </div>
 
@@ -271,7 +271,7 @@ export const CustomerProfilePage: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-indigo-600 text-white text-xs font-semibold rounded-xl"
+                  className="px-5 py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 text-xs font-bold border border-[#F2D070] rounded-xl shadow-xs"
                 >
                   Save Address
                 </button>
@@ -281,17 +281,17 @@ export const CustomerProfilePage: React.FC = () => {
 
           {addresses.length === 0 ? (
             <div className="bg-white rounded-2xl border border-slate-200/80 p-10 text-center space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-400 mx-auto flex items-center justify-center">
+              <div className="w-12 h-12 rounded-xl bg-[#FFE08B]/20 text-amber-900 border border-[#FFE08B]/40 mx-auto flex items-center justify-center">
                 <Home className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-semibold text-slate-800">No saved addresses</h3>
+              <h3 className="text-base font-bold text-slate-900">No saved addresses</h3>
               <p className="text-sm text-slate-500 max-w-sm mx-auto">
                 You haven't saved any delivery addresses yet. Add an address to speed up checkout.
               </p>
               <button
                 type="button"
                 onClick={() => setShowAddAddress(true)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 text-xs font-semibold rounded-xl transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] text-xs font-bold rounded-xl transition-colors shadow-xs"
               >
                 <Plus className="w-3.5 h-3.5" /> Add your first address
               </button>
@@ -302,14 +302,14 @@ export const CustomerProfilePage: React.FC = () => {
                 <div
                   key={a.id}
                   className={`p-5 rounded-2xl border transition-all space-y-3 ${
-                    a.isDefault ? 'border-indigo-600 bg-indigo-50/20 shadow-sm' : 'border-slate-200 bg-white'
+                    a.isDefault ? 'border-[#FFE08B] bg-[#FFFDF5] shadow-sm' : 'border-slate-200 bg-white hover:border-[#FFE08B]'
                   }`}
                 >
                   <div className="flex justify-between items-start">
-                    <span className="font-bold text-slate-800 text-sm">{a.recipientName}</span>
+                    <span className="font-bold text-slate-900 text-sm">{a.recipientName}</span>
                     <div className="flex items-center gap-2">
                       {a.isDefault && (
-                        <span className="text-[10px] font-bold uppercase bg-indigo-600 text-white px-2 py-0.5 rounded-full">
+                        <span className="text-[10px] font-bold uppercase bg-[#FFE08B] text-slate-950 border border-[#F2D070] px-2 py-0.5 rounded-full">
                           Default
                         </span>
                       )}
@@ -332,7 +332,7 @@ export const CustomerProfilePage: React.FC = () => {
                   {!a.isDefault && (
                     <button
                       onClick={() => setDefault(a.id)}
-                      className="text-xs font-semibold text-indigo-600 hover:text-indigo-700"
+                      className="text-xs font-bold text-slate-900 hover:text-amber-800"
                     >
                       Set as default
                     </button>

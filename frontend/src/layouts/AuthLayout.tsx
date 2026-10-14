@@ -4,14 +4,14 @@ import { ShoppingBag } from 'lucide-react';
 
 export const AuthLayout: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-violet-50 to-purple-50 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-white via-[#FFFDF5] to-[#FFF9E6] flex flex-col">
       {/* Top bar */}
       <header className="py-5 px-6">
-        <Link to="/" className="inline-flex items-center gap-2 text-indigo-600 font-bold text-xl hover:text-indigo-700 transition-colors">
-          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-            <ShoppingBag className="w-5 h-5 text-white" />
+        <Link to="/" className="inline-flex items-center gap-2.5 text-slate-900 font-extrabold text-xl transition-colors">
+          <div className="w-9 h-9 bg-[#FFE08B] border border-[#F2D070] rounded-xl flex items-center justify-center text-slate-950 shadow-xs">
+            <ShoppingBag className="w-5 h-5 text-slate-950" />
           </div>
-          NovaMarket
+          <span>Nova<span className="bg-[#FFE08B] px-1 rounded-md text-slate-950 ml-0.5">Market</span></span>
         </Link>
       </header>
 

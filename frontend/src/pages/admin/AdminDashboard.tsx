@@ -122,14 +122,14 @@ export const AdminDashboard: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-slate-800/80 p-6 rounded-3xl border border-slate-700/60 shadow-lg">
         <div>
-          <span className="text-xs uppercase font-bold text-purple-400 tracking-wider">Super Administrator</span>
+          <span className="text-xs uppercase font-extrabold text-[#FFE08B] tracking-wider">Super Administrator</span>
           <h1 className="text-2xl font-black text-white mt-0.5">Platform Control Center</h1>
           <p className="text-xs text-slate-400 mt-1">Platform-wide metrics, governance, and catalog oversight</p>
         </div>
 
         <button
           onClick={loadAdminData}
-          className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-700 hover:bg-slate-600 text-slate-200 text-xs font-bold rounded-xl transition-colors self-start sm:self-auto"
+          className="inline-flex items-center gap-2 px-3.5 py-2 bg-slate-700 hover:bg-[#FFE08B] hover:text-slate-950 text-slate-200 text-xs font-bold rounded-xl transition-colors self-start sm:self-auto"
         >
           <RefreshCw className="w-3.5 h-3.5" /> Refresh Data
         </button>
@@ -141,7 +141,7 @@ export const AdminDashboard: React.FC = () => {
           onClick={() => setActiveTab('overview')}
           className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'overview'
-              ? 'border-purple-500 text-purple-400'
+              ? 'border-[#FFE08B] text-[#FFE08B] font-bold'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -151,7 +151,7 @@ export const AdminDashboard: React.FC = () => {
           onClick={() => setActiveTab('categories')}
           className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'categories'
-              ? 'border-purple-500 text-purple-400'
+              ? 'border-[#FFE08B] text-[#FFE08B] font-bold'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -161,7 +161,7 @@ export const AdminDashboard: React.FC = () => {
           onClick={() => setActiveTab('products')}
           className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'products'
-              ? 'border-purple-500 text-purple-400'
+              ? 'border-[#FFE08B] text-[#FFE08B] font-bold'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -171,7 +171,7 @@ export const AdminDashboard: React.FC = () => {
           onClick={() => setActiveTab('orders')}
           className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'orders'
-              ? 'border-purple-500 text-purple-400'
+              ? 'border-[#FFE08B] text-[#FFE08B] font-bold'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -181,7 +181,7 @@ export const AdminDashboard: React.FC = () => {
           onClick={() => setActiveTab('users')}
           className={`pb-3 transition-colors border-b-2 whitespace-nowrap ${
             activeTab === 'users'
-              ? 'border-purple-500 text-purple-400'
+              ? 'border-[#FFE08B] text-[#FFE08B] font-bold'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -210,7 +210,7 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 shadow-md">
-              <div className="p-3 bg-purple-500/10 text-purple-400 rounded-xl w-fit mb-3">
+              <div className="p-3 bg-[#FFE08B]/20 text-[#FFE08B] rounded-xl w-fit mb-3">
                 <Users className="w-5 h-5" />
               </div>
               <p className="text-xs text-slate-400 font-medium">Registered Customers</p>
@@ -218,7 +218,7 @@ export const AdminDashboard: React.FC = () => {
             </div>
 
             <div className="bg-slate-800/80 p-6 rounded-2xl border border-slate-700/60 shadow-md">
-              <div className="p-3 bg-amber-500/10 text-amber-400 rounded-xl w-fit mb-3">
+              <div className="p-3 bg-[#FFE08B]/20 text-[#FFE08B] rounded-xl w-fit mb-3">
                 <Store className="w-5 h-5" />
               </div>
               <p className="text-xs text-slate-400 font-medium">Active Merchants</p>
@@ -236,7 +236,7 @@ export const AdminDashboard: React.FC = () => {
                 {orders.slice(0, 5).map((o) => (
                   <div key={o.id} className="py-3 flex items-center justify-between text-xs">
                     <div>
-                      <span className="font-mono font-bold text-purple-400">{o.orderNumber}</span>
+                      <span className="font-mono font-bold text-[#FFE08B]">{o.orderNumber}</span>
                       <p className="text-slate-400">{o.shippingSnapshot?.recipientName}</p>
                     </div>
                     <div className="text-right">
@@ -261,7 +261,7 @@ export const AdminDashboard: React.FC = () => {
             </div>
             <button
               onClick={() => setShowCatModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-bold border border-[#F2D070] rounded-xl text-xs shadow-xs"
             >
               <Plus className="w-3.5 h-3.5" /> Add Category
             </button>
@@ -294,7 +294,7 @@ export const AdminDashboard: React.FC = () => {
                     <td className="p-3 text-right">
                       <button
                         onClick={() => handleToggleCategory(c)}
-                        className="text-xs font-semibold text-purple-400 hover:text-purple-300"
+                        className="text-xs font-semibold text-[#FFE08B] hover:text-amber-300"
                       >
                         {c.isActive ? 'Disable' : 'Enable'}
                       </button>
@@ -340,7 +340,7 @@ export const AdminDashboard: React.FC = () => {
                     <td className="p-3 text-right">
                       <button
                         onClick={() => handleToggleProduct(p)}
-                        className="text-xs font-semibold text-purple-400 hover:text-purple-300"
+                        className="text-xs font-semibold text-[#FFE08B] hover:text-amber-300"
                       >
                         {p.status === 'active' ? 'Suspend' : 'Approve'}
                       </button>
@@ -371,7 +371,7 @@ export const AdminDashboard: React.FC = () => {
               <tbody className="divide-y divide-slate-700">
                 {orders.map((o) => (
                   <tr key={o.id}>
-                    <td className="p-3 font-mono font-bold text-purple-400">{o.orderNumber}</td>
+                    <td className="p-3 font-mono font-bold text-[#FFE08B]">{o.orderNumber}</td>
                     <td className="p-3 text-slate-300">{o.shippingSnapshot?.recipientName}</td>
                     <td className="p-3 font-bold text-white">${o.total.toFixed(2)}</td>
                     <td className="p-3">
@@ -421,7 +421,7 @@ export const AdminDashboard: React.FC = () => {
                     <tr key={u.id}>
                       <td className="p-3 font-mono text-slate-400">{u.id.slice(0, 8)}...</td>
                       <td className="p-3">
-                        <span className="px-2 py-0.5 rounded-md font-bold text-[10px] uppercase bg-purple-500/20 text-purple-300">
+                        <span className="px-2 py-0.5 rounded-md font-bold text-[10px] uppercase bg-[#FFE08B]/20 text-[#FFE08B] border border-[#FFE08B]/40">
                           {u.role}
                         </span>
                       </td>
@@ -470,7 +470,7 @@ export const AdminDashboard: React.FC = () => {
                     setNewCatSlug(e.target.value.toLowerCase().replace(/[^a-z0-9]+/g, '-'));
                   }}
                   placeholder="e.g. Home & Kitchen"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#FFE08B]"
                 />
               </div>
 
@@ -481,7 +481,7 @@ export const AdminDashboard: React.FC = () => {
                   value={newCatSlug}
                   onChange={(e) => setNewCatSlug(e.target.value)}
                   placeholder="home-kitchen"
-                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm font-mono"
+                  className="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-white text-sm font-mono focus:outline-none focus:ring-2 focus:ring-[#FFE08B]"
                 />
               </div>
 
@@ -495,7 +495,7 @@ export const AdminDashboard: React.FC = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl font-bold"
+                  className="px-4 py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 rounded-xl font-bold border border-[#F2D070]"
                 >
                   Create Category
                 </button>

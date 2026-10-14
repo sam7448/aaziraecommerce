@@ -60,9 +60,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const isOutOfStock = product.inventory && product.inventory.quantity <= 0;
 
   return (
-    <div className="group relative bg-white border border-slate-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+    <div className="group relative bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs hover:shadow-xl hover:border-[#FFE08B] transition-all duration-300 flex flex-col justify-between">
       {/* Product Image & Badges */}
-      <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+      <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
         <Link to={`/products/${product.slug || product.id}`}>
           <img
             src={primaryImage}
@@ -75,7 +75,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5">
           {hasDiscount && (
-            <span className="bg-rose-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">
+            <span className="bg-[#FFE08B] text-slate-950 text-[11px] font-extrabold px-2.5 py-0.5 rounded-full shadow-xs border border-[#F2D070]">
               -{discountPercent}% OFF
             </span>
           )}
@@ -92,7 +92,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           className={`absolute top-3 right-3 p-2 rounded-full backdrop-blur-md transition-all ${
             isWishlisted
               ? 'bg-rose-50 text-rose-500 shadow-sm'
-              : 'bg-white/80 text-slate-600 hover:text-rose-500 hover:bg-white shadow-sm'
+              : 'bg-white/90 text-slate-600 hover:text-rose-500 hover:bg-white shadow-xs'
           }`}
           title="Save to Wishlist"
         >
@@ -104,14 +104,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <div className="p-4 flex-1 flex flex-col justify-between">
         <div>
           <Link to={`/products/${product.slug || product.id}`}>
-            <h3 className="font-semibold text-slate-800 text-sm line-clamp-2 hover:text-indigo-600 transition-colors">
+            <h3 className="font-semibold text-slate-800 text-sm line-clamp-2 hover:text-amber-800 transition-colors">
               {product.name}
             </h3>
           </Link>
         </div>
 
         {/* Price & Add to Cart */}
-        <div className="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between">
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
           <div>
             <div className="flex items-baseline gap-1.5">
               <span className="text-base font-bold text-slate-900">
@@ -124,23 +124,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               )}
             </div>
             {product.inventory && product.inventory.quantity <= 5 && product.inventory.quantity > 0 && (
-              <p className="text-[10px] font-medium text-amber-600">Only {product.inventory.quantity} left!</p>
+              <p className="text-[10px] font-medium text-amber-700">Only {product.inventory.quantity} left!</p>
             )}
           </div>
 
           <button
             onClick={handleAddToCart}
             disabled={isOutOfStock || added}
-            className={`p-2.5 rounded-xl font-medium flex items-center justify-center transition-all ${
+            className={`p-2.5 rounded-xl font-bold flex items-center justify-center transition-all ${
               added
                 ? 'bg-emerald-600 text-white'
                 : isOutOfStock
                 ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-200'
+                : 'bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] shadow-xs'
             }`}
             title="Add to cart"
           >
-            {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
+            {added ? <Check className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4 text-slate-900" />}
           </button>
         </div>
       </div>

@@ -1,8 +1,42 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #FFE08B;
+  --color-brand-50: #FFFDF7;
+  --color-brand-100: #FFF9E6;
+  --color-brand-200: #FFF1C5;
+  --color-brand-300: #FFE89D;
+  --color-brand-400: #FFE08B;
+  --color-brand-500: #F3CE65;
+  --color-brand-600: #D8B038;
+  --color-brand-700: #AA861E;
+  --color-brand-800: #7C5E13;
+  --color-brand-900: #4E390A;
+}
+
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 antialiased min-h-screen;
+    background-color: #FFFFFF;
+    color: #0F172A;
     font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
   }
+}
+
+/* Custom Brand Utility Helpers */
+.bg-brand-primary {
+  background-color: #FFE08B;
+}
+
+.bg-brand-hover:hover {
+  background-color: #F5D374;
+}
+
+.text-brand-dark {
+  color: #1E293B;
+}
+
+.border-brand-primary {
+  border-color: #FFE08B;
 }

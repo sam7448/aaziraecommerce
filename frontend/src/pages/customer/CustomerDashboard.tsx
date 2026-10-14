@@ -96,22 +96,22 @@ export const CustomerDashboard: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* Welcome Hero Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-700 via-indigo-600 to-violet-600 text-white p-8 sm:p-10 shadow-xl shadow-indigo-100">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-[#FFFDF5] to-[#FFF8E6] border-2 border-[#FFE08B] text-slate-900 p-8 sm:p-10 shadow-xl shadow-amber-100/40">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-2xl font-bold border border-white/30 shadow-inner">
+            <div className="w-16 h-16 rounded-2xl bg-[#FFE08B] text-slate-950 flex items-center justify-center text-2xl font-black border border-[#F2D070] shadow-sm">
               {user?.fullName ? user.fullName[0].toUpperCase() : user?.email?.[0].toUpperCase() || 'U'}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">
                   Welcome back, {user?.fullName || user?.email?.split('@')[0]}!
                 </h1>
-                <span className="px-2 py-0.5 text-xs font-semibold uppercase rounded-md bg-white/20 border border-white/30 backdrop-blur-sm text-indigo-100">
+                <span className="px-2.5 py-0.5 text-xs font-bold uppercase rounded-md bg-[#FFE08B] border border-[#F2D070] text-slate-950 shadow-xs">
                   {user?.role}
                 </span>
               </div>
-              <p className="text-indigo-100 text-sm mt-1">
+              <p className="text-slate-600 text-sm mt-1">
                 Manage your orders, saved items, and account settings from your customer portal.
               </p>
             </div>
@@ -120,80 +120,80 @@ export const CustomerDashboard: React.FC = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-white text-indigo-700 font-semibold rounded-xl text-sm shadow hover:bg-indigo-50 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-bold border border-[#F2D070] rounded-xl text-sm shadow-sm transition-all hover:shadow"
             >
-              <Sparkles className="w-4 h-4 text-indigo-600" />
+              <Sparkles className="w-4 h-4 text-slate-950" />
               Explore Catalog
             </Link>
             <Link
               to="/profile"
-              className="inline-flex items-center gap-2 px-4 py-2.5 bg-indigo-800/40 hover:bg-indigo-800/60 border border-white/20 text-white rounded-xl text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 rounded-xl text-sm font-semibold transition-colors shadow-sm"
             >
-              <User className="w-4 h-4" />
+              <User className="w-4 h-4 text-slate-600" />
               Edit Profile
             </Link>
           </div>
         </div>
 
         {/* Decorative background circles */}
-        <div className="absolute -right-16 -top-16 w-64 h-64 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute right-1/3 -bottom-20 w-48 h-48 bg-purple-500/20 rounded-full blur-xl pointer-events-none" />
+        <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#FFE08B]/20 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute right-1/3 -bottom-20 w-48 h-48 bg-amber-200/20 rounded-full blur-xl pointer-events-none" />
       </div>
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {/* Total Orders */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between hover:border-[#FFE08B] transition-colors">
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Total Orders</p>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{orders.length}</h3>
-            <Link to="/orders" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium inline-flex items-center gap-1 mt-2">
-              View all orders <ArrowRight className="w-3 h-3" />
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Total Orders</p>
+            <h3 className="text-2xl font-extrabold text-slate-900 mt-1">{orders.length}</h3>
+            <Link to="/orders" className="text-xs text-slate-900 hover:text-amber-800 font-bold inline-flex items-center gap-1 mt-2">
+              View all orders <ArrowRight className="w-3 h-3 text-amber-700" />
             </Link>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-[#FFE08B]/30 text-amber-950 border border-[#FFE08B] flex items-center justify-center">
             <Package className="w-6 h-6" />
           </div>
         </div>
 
         {/* Active Orders */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between hover:border-[#FFE08B] transition-colors">
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Active Deliveries</p>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{activeOrdersCount}</h3>
-            <span className="text-xs text-emerald-600 font-medium inline-flex items-center gap-1 mt-2">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Active Deliveries</p>
+            <h3 className="text-2xl font-extrabold text-slate-900 mt-1">{activeOrdersCount}</h3>
+            <span className="text-xs text-emerald-600 font-semibold inline-flex items-center gap-1 mt-2">
               <Truck className="w-3.5 h-3.5" /> In transit or processing
             </span>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center">
             <Clock className="w-6 h-6" />
           </div>
         </div>
 
         {/* Cart Items */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between hover:border-[#FFE08B] transition-colors">
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Items in Cart</p>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{totalCartCount}</h3>
-            <Link to="/cart" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium inline-flex items-center gap-1 mt-2">
-              Go to checkout <ArrowRight className="w-3 h-3" />
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Items in Cart</p>
+            <h3 className="text-2xl font-extrabold text-slate-900 mt-1">{totalCartCount}</h3>
+            <Link to="/cart" className="text-xs text-slate-900 hover:text-amber-800 font-bold inline-flex items-center gap-1 mt-2">
+              Go to checkout <ArrowRight className="w-3 h-3 text-amber-700" />
             </Link>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-[#FFE08B]/30 text-amber-950 border border-[#FFE08B] flex items-center justify-center">
             <ShoppingBag className="w-6 h-6" />
           </div>
         </div>
 
         {/* Saved Wishlist */}
-        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between">
+        <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-sm flex items-center justify-between hover:border-[#FFE08B] transition-colors">
           <div>
-            <p className="text-xs font-medium text-slate-500 uppercase tracking-wider">Wishlist Items</p>
-            <h3 className="text-2xl font-bold text-slate-900 mt-1">{wishlistCount}</h3>
-            <Link to="/wishlist" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium inline-flex items-center gap-1 mt-2">
-              Manage wishlist <ArrowRight className="w-3 h-3" />
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Wishlist Items</p>
+            <h3 className="text-2xl font-extrabold text-slate-900 mt-1">{wishlistCount}</h3>
+            <Link to="/wishlist" className="text-xs text-slate-900 hover:text-amber-800 font-bold inline-flex items-center gap-1 mt-2">
+              Manage wishlist <ArrowRight className="w-3 h-3 text-amber-700" />
             </Link>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-xl bg-rose-50 text-rose-600 border border-rose-100 flex items-center justify-center">
             <Heart className="w-6 h-6" />
           </div>
         </div>
@@ -212,31 +212,31 @@ export const CustomerDashboard: React.FC = () => {
               {orders.length > 0 && (
                 <Link
                   to="/orders"
-                  className="text-xs font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                  className="text-xs font-bold text-slate-900 hover:text-amber-800 flex items-center gap-1"
                 >
-                  View All Orders <ChevronRight className="w-4 h-4" />
+                  View All Orders <ChevronRight className="w-4 h-4 text-amber-700" />
                 </Link>
               )}
             </div>
 
             {loadingOrders ? (
               <div className="py-12 flex justify-center items-center">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FFE08B]" />
               </div>
             ) : orders.length === 0 ? (
               <div className="py-12 px-6 text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-slate-50 text-slate-400 mx-auto flex items-center justify-center border border-slate-200">
+                <div className="w-16 h-16 rounded-full bg-amber-50/60 text-amber-900 mx-auto flex items-center justify-center border border-[#FFE08B]/60">
                   <Package className="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 className="text-base font-semibold text-slate-800">No orders placed yet</h3>
+                  <h3 className="text-base font-bold text-slate-900">No orders placed yet</h3>
                   <p className="text-sm text-slate-500 max-w-sm mx-auto mt-1">
                     Once you make a purchase, your order history and tracking updates will appear right here.
                   </p>
                 </div>
                 <Link
                   to="/products"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-sm font-semibold transition-colors shadow-sm"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 rounded-xl text-sm font-bold border border-[#F2D070] transition-colors shadow-sm"
                 >
                   <ShoppingBag className="w-4 h-4" /> Start Shopping
                 </Link>
@@ -246,15 +246,15 @@ export const CustomerDashboard: React.FC = () => {
                 {orders.slice(0, 4).map((order) => (
                   <div
                     key={order.id}
-                    className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/80 transition-colors"
+                    className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#FFFDF5] transition-colors"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <div className="w-11 h-11 rounded-xl bg-[#FFE08B]/30 text-amber-950 border border-[#FFE08B] flex items-center justify-center shrink-0 mt-0.5">
                         <Package className="w-5 h-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2.5">
-                          <span className="font-semibold text-sm text-slate-800">
+                          <span className="font-bold text-sm text-slate-900">
                             #{order.orderNumber}
                           </span>
                           {getStatusBadge(order.status)}
@@ -272,11 +272,11 @@ export const CustomerDashboard: React.FC = () => {
                     <div className="flex items-center justify-between sm:justify-end gap-6 pt-2 sm:pt-0 border-t sm:border-0 border-slate-100">
                       <div className="text-right">
                         <span className="text-xs text-slate-400 block">Total</span>
-                        <span className="text-sm font-bold text-slate-900">${order.total.toFixed(2)}</span>
+                        <span className="text-sm font-black text-slate-950">${order.total.toFixed(2)}</span>
                       </div>
                       <Link
                         to={`/orders/${order.id}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-700 rounded-lg text-xs font-medium transition-colors"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 bg-slate-50 hover:bg-[#FFE08B] hover:text-slate-950 text-slate-700 border border-slate-200 rounded-lg text-xs font-semibold transition-colors"
                       >
                         Details <ChevronRight className="w-3.5 h-3.5" />
                       </Link>
@@ -291,26 +291,26 @@ export const CustomerDashboard: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               to="/products"
-              className="p-5 rounded-2xl bg-gradient-to-br from-indigo-50 to-violet-50 border border-indigo-100 flex items-center gap-4 hover:shadow-md transition-all group"
+              className="p-5 rounded-2xl bg-gradient-to-br from-white to-[#FFF9E6] border border-[#FFE08B] flex items-center gap-4 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-[#FFE08B] text-slate-950 border border-[#F2D070] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
                 <ShoppingBag className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-semibold text-slate-800 text-sm">Explore All Products</h4>
+                <h4 className="font-bold text-slate-900 text-sm">Explore All Products</h4>
                 <p className="text-xs text-slate-500 mt-0.5">Discover the newest drops, top brands and hot deals</p>
               </div>
             </Link>
 
             <Link
               to="/profile"
-              className="p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 border border-purple-100 flex items-center gap-4 hover:shadow-md transition-all group"
+              className="p-5 rounded-2xl bg-gradient-to-br from-white to-[#FFFDF5] border border-slate-200 hover:border-[#FFE08B] flex items-center gap-4 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-slate-900 text-[#FFE08B] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform shadow-xs">
                 <MapPin className="w-6 h-6" />
               </div>
               <div>
-                <h4 className="font-semibold text-slate-800 text-sm">Manage Addresses</h4>
+                <h4 className="font-bold text-slate-900 text-sm">Manage Addresses</h4>
                 <p className="text-xs text-slate-500 mt-0.5">Add or update your delivery addresses & preferences</p>
               </div>
             </Link>
@@ -321,13 +321,13 @@ export const CustomerDashboard: React.FC = () => {
         <div className="space-y-6">
           {/* User Account Card */}
           <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-5">
-            <h3 className="font-bold text-slate-800 text-base">Account Overview</h3>
+            <h3 className="font-bold text-slate-900 text-base">Account Overview</h3>
             <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
-              <div className="w-12 h-12 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold text-base">
+              <div className="w-12 h-12 rounded-full bg-[#FFE08B] text-slate-950 border border-[#F2D070] flex items-center justify-center font-black text-base shadow-xs">
                 {user?.fullName ? user.fullName[0].toUpperCase() : user?.email?.[0].toUpperCase() || 'U'}
               </div>
               <div className="overflow-hidden">
-                <p className="font-semibold text-slate-800 text-sm truncate">{user?.fullName || 'Nova Customer'}</p>
+                <p className="font-bold text-slate-900 text-sm truncate">{user?.fullName || 'Nova Customer'}</p>
                 <p className="text-xs text-slate-500 truncate">{user?.email}</p>
               </div>
             </div>
@@ -335,7 +335,7 @@ export const CustomerDashboard: React.FC = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between text-xs py-1">
                 <span className="text-slate-500">Account Type</span>
-                <span className="font-semibold text-slate-700 uppercase">{user?.role}</span>
+                <span className="font-bold text-slate-800 uppercase">{user?.role}</span>
               </div>
               <div className="flex items-center justify-between text-xs py-1">
                 <span className="text-slate-500">Status</span>
@@ -352,7 +352,7 @@ export const CustomerDashboard: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/profile"
-                className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-slate-50 hover:bg-[#FFE08B] hover:text-slate-950 border border-slate-200 hover:border-[#F2D070] rounded-xl text-xs font-bold text-slate-700 transition-colors"
               >
                 Go to Full Profile <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -360,21 +360,21 @@ export const CustomerDashboard: React.FC = () => {
           </div>
 
           {/* Guarantee / Perks */}
-          <div className="bg-slate-50 rounded-2xl border border-slate-200/80 p-5 space-y-4">
-            <div className="flex items-center gap-2 text-indigo-700 font-semibold text-xs uppercase tracking-wider">
-              <ShieldCheck className="w-4 h-4" /> Buyer Protection
+          <div className="bg-[#FFFDF5] rounded-2xl border border-[#FFE08B]/80 p-5 space-y-4">
+            <div className="flex items-center gap-2 text-amber-950 font-bold text-xs uppercase tracking-wider">
+              <ShieldCheck className="w-4 h-4 text-amber-600" /> Buyer Protection
             </div>
-            <div className="space-y-2.5 text-xs text-slate-600">
+            <div className="space-y-2.5 text-xs text-slate-700">
               <p className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>100% authentic items sourced directly from verified sellers.</span>
               </p>
               <p className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>30-day hassle-free returns on eligible merchandise.</span>
               </p>
               <p className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>Encrypted checkout powered by industry standard tokenization.</span>
               </p>
             </div>

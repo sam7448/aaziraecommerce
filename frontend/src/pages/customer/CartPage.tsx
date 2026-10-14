@@ -133,14 +133,14 @@ export const CartPage: React.FC = () => {
             </div>
 
             {/* Free shipping threshold notice */}
-            <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-4 flex items-center justify-between text-sm">
-              <div>
-                <p className="font-semibold text-indigo-950">
+            <div className="bg-[#FFE08B]/20 border border-[#FFE08B] rounded-2xl p-4 flex items-center justify-between text-sm">
+              <div className="w-full">
+                <p className="font-bold text-slate-950">
                   {isFreeShipping ? '🎉 You unlocked Free Express Shipping!' : `Add $${(50 - subtotal).toFixed(2)} more for Free Shipping!`}
                 </p>
-                <div className="w-full bg-indigo-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                <div className="w-full bg-[#FFE08B]/40 h-2 rounded-full mt-2 overflow-hidden border border-[#FFE08B]">
                   <div
-                    className="bg-indigo-600 h-full rounded-full transition-all duration-500"
+                    className="bg-[#FFE08B] h-full rounded-full transition-all duration-500"
                     style={{ width: `${Math.min(100, (subtotal / 50) * 100)}%` }}
                   />
                 </div>
@@ -149,7 +149,7 @@ export const CartPage: React.FC = () => {
           </div>
 
           {/* Order Summary Checkout Card */}
-          <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm space-y-6">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-6">
             <h2 className="text-lg font-bold text-slate-900">Order Summary</h2>
 
             <div className="space-y-3 text-sm text-slate-600">
@@ -176,7 +176,7 @@ export const CartPage: React.FC = () => {
             <button
               onClick={() => navigate('/checkout')}
               disabled={loading}
-              className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 transition-all"
+              className="w-full py-3.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-black rounded-xl shadow-md shadow-amber-200/60 border border-[#F2D070] flex items-center justify-center gap-2 transition-all cursor-pointer"
             >
               Proceed to Checkout <ArrowRight className="w-4 h-4" />
             </button>

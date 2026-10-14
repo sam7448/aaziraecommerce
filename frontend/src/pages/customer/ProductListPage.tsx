@@ -115,7 +115,7 @@ export const ProductListPage: React.FC = () => {
             <select
               value={currentSort}
               onChange={(e) => updateParam('sortBy', e.target.value)}
-              className="bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+              className="bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl px-3 py-2 focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B] focus:outline-none"
             >
               <option value="newest">Newest Arrivals</option>
               <option value="price_asc">Price: Low to High</option>
@@ -132,10 +132,10 @@ export const ProductListPage: React.FC = () => {
             sidebarOpen ? 'block fixed inset-0 z-50 bg-black/40 p-4' : 'hidden'
           } lg:relative lg:p-0`}
         >
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6 max-w-sm ml-auto lg:max-w-none">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-xs space-y-6 max-w-sm ml-auto lg:max-w-none">
             <div className="flex items-center justify-between">
               <h2 className="font-bold text-slate-900 flex items-center gap-2">
-                <Filter className="w-4 h-4 text-indigo-600" /> Filter Catalog
+                <Filter className="w-4 h-4 text-amber-800" /> Filter Catalog
               </h2>
               {sidebarOpen && (
                 <button onClick={() => setSidebarOpen(false)} className="lg:hidden p-1 text-slate-400">
@@ -147,7 +147,7 @@ export const ProductListPage: React.FC = () => {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="w-full text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 py-2 rounded-xl transition-colors"
+                className="w-full text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 py-2 rounded-xl transition-colors cursor-pointer"
               >
                 Clear All Filters
               </button>
@@ -159,10 +159,10 @@ export const ProductListPage: React.FC = () => {
               <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
                 <button
                   onClick={() => updateParam('categoryId', null)}
-                  className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                  className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                     !currentCategory
-                      ? 'bg-indigo-50 text-indigo-700 font-semibold'
-                      : 'text-slate-600 hover:bg-slate-50'
+                      ? 'bg-[#FFE08B] text-slate-950 font-bold border border-[#F2D070]'
+                      : 'text-slate-600 hover:bg-[#FFE08B]/20'
                   }`}
                 >
                   All Categories
@@ -171,10 +171,10 @@ export const ProductListPage: React.FC = () => {
                   <button
                     key={c.id}
                     onClick={() => updateParam('categoryId', c.id)}
-                    className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors ${
+                    className={`w-full text-left text-sm px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
                       currentCategory === c.id
-                        ? 'bg-indigo-50 text-indigo-700 font-semibold'
-                        : 'text-slate-600 hover:bg-slate-50'
+                        ? 'bg-[#FFE08B] text-slate-950 font-bold border border-[#F2D070]'
+                        : 'text-slate-600 hover:bg-[#FFE08B]/20'
                     }`}
                   >
                     {c.name}
@@ -193,7 +193,7 @@ export const ProductListPage: React.FC = () => {
                     placeholder="Min"
                     value={localMinPrice}
                     onChange={(e) => setLocalMinPrice(e.target.value)}
-                    className="w-full px-3 py-1.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-1.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B]"
                   />
                   <span className="text-slate-400">-</span>
                   <input
@@ -201,12 +201,12 @@ export const ProductListPage: React.FC = () => {
                     placeholder="Max"
                     value={localMaxPrice}
                     onChange={(e) => setLocalMaxPrice(e.target.value)}
-                    className="w-full px-3 py-1.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-1.5 text-sm bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B]"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full py-1.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-semibold rounded-lg transition-colors"
+                  className="w-full py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 text-xs font-bold rounded-lg transition-colors border border-[#F2D070] shadow-xs cursor-pointer"
                 >
                   Apply Price
                 </button>
@@ -242,7 +242,7 @@ export const ProductListPage: React.FC = () => {
               </p>
               <button
                 onClick={clearAllFilters}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors"
+                className="px-5 py-2.5 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-bold border border-[#F2D070] rounded-xl text-sm shadow-sm transition-all"
               >
                 Reset All Filters
               </button>

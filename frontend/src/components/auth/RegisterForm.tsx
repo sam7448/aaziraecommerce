@@ -125,7 +125,7 @@ export const RegisterForm: React.FC = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Repeat your password"
             required
-            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B] transition"
           />
         </div>
       </div>
@@ -138,27 +138,27 @@ export const RegisterForm: React.FC = () => {
           <button
             type="button"
             onClick={() => setRole('customer')}
-            className={`flex flex-col items-center gap-2 py-3 px-4 rounded-xl border-2 transition-all ${
+            className={`flex flex-col items-center gap-2 py-3 px-4 rounded-xl border-2 transition-all cursor-pointer ${
               role === 'customer'
-                ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-slate-300'
+                ? 'border-[#FFE08B] bg-[#FFE08B]/20 text-slate-950 font-bold shadow-xs'
+                : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'
             }`}
           >
-            <User className="w-5 h-5" />
-            <span className="text-sm font-medium">Customer</span>
+            <User className="w-5 h-5 text-slate-900" />
+            <span className="text-sm">Customer</span>
           </button>
           {/* Seller option */}
           <button
             type="button"
             onClick={() => setRole('seller')}
-            className={`flex flex-col items-center gap-2 py-3 px-4 rounded-xl border-2 transition-all ${
+            className={`flex flex-col items-center gap-2 py-3 px-4 rounded-xl border-2 transition-all cursor-pointer ${
               role === 'seller'
-                ? 'border-indigo-500 bg-indigo-50 text-indigo-700'
-                : 'border-slate-200 bg-slate-50 text-slate-500 hover:border-slate-300'
+                ? 'border-[#FFE08B] bg-[#FFE08B]/20 text-slate-950 font-bold shadow-xs'
+                : 'border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300'
             }`}
           >
-            <Briefcase className="w-5 h-5" />
-            <span className="text-sm font-medium">Seller</span>
+            <Briefcase className="w-5 h-5 text-slate-900" />
+            <span className="text-sm">Seller</span>
           </button>
         </div>
       </div>
@@ -167,16 +167,16 @@ export const RegisterForm: React.FC = () => {
       <button
         type="submit"
         disabled={loading}
-        className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold rounded-xl text-sm transition-colors mt-1"
+        className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#FFE08B] hover:bg-[#F3D274] disabled:opacity-50 text-slate-950 font-bold rounded-xl text-sm transition-colors mt-1 shadow-xs border border-[#F2D070] cursor-pointer"
       >
-        {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+        {loading && <Loader2 className="w-4 h-4 animate-spin text-slate-900" />}
         {loading ? 'Creating account…' : 'Create Account'}
       </button>
 
       {/* Sign in link */}
       <p className="text-center text-sm text-slate-500">
         Already have an account?{' '}
-        <Link to="/login" className="text-indigo-600 hover:text-indigo-700 font-medium transition-colors">
+        <Link to="/login" className="text-amber-800 hover:text-amber-950 font-bold transition-colors">
           Sign in
         </Link>
       </p>

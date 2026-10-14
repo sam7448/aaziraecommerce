@@ -57,11 +57,11 @@ export const OrderDetailPage: React.FC = () => {
       </Link>
 
       {/* Header card */}
-      <div className="bg-white rounded-3xl border border-slate-100 p-6 sm:p-8 shadow-sm space-y-6">
+      <div className="bg-white rounded-3xl border-2 border-[#FFE08B] p-6 sm:p-8 shadow-sm space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
           <div>
             <span className="text-xs uppercase font-bold text-slate-400">Order Information</span>
-            <h1 className="text-2xl font-mono font-bold text-slate-900">{order.orderNumber}</h1>
+            <h1 className="text-2xl font-mono font-black text-slate-900">{order.orderNumber}</h1>
             <p className="text-xs text-slate-500 mt-1">
               Placed on {new Date(order.createdAt).toLocaleString()}
             </p>
@@ -69,7 +69,7 @@ export const OrderDetailPage: React.FC = () => {
 
           <div className="text-right">
             <span className="text-xs text-slate-400 block">Total Amount</span>
-            <span className="text-2xl font-extrabold text-indigo-700">${order.total.toFixed(2)}</span>
+            <span className="text-2xl font-black text-slate-950">${order.total.toFixed(2)}</span>
           </div>
         </div>
 
@@ -85,12 +85,12 @@ export const OrderDetailPage: React.FC = () => {
                   <div key={st} className="relative z-10 flex flex-col items-center gap-1.5 bg-white px-2">
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                        isPassed ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-400'
+                        isPassed ? 'bg-[#FFE08B] text-slate-950 border border-[#F2D070] shadow-xs' : 'bg-slate-100 text-slate-400'
                       }`}
                     >
-                      {isPassed ? <CheckCircle2 className="w-4 h-4" /> : i + 1}
+                      {isPassed ? <CheckCircle2 className="w-4 h-4 text-slate-950" /> : i + 1}
                     </div>
-                    <span className="text-[11px] font-medium capitalize text-slate-600">{st}</span>
+                    <span className="text-[11px] font-bold capitalize text-slate-700">{st}</span>
                   </div>
                 );
               })}
@@ -106,16 +106,16 @@ export const OrderDetailPage: React.FC = () => {
       {/* Grid: Delivery Snapshot & Items */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Purchased Items List */}
-        <div className="md:col-span-2 bg-white rounded-2xl border border-slate-100 p-6 shadow-sm space-y-4">
+        <div className="md:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-4">
           <h2 className="text-base font-bold text-slate-900 flex items-center gap-2">
-            <Package className="w-4 h-4 text-indigo-600" /> Items in this Order ({order.items?.length})
+            <Package className="w-4 h-4 text-amber-800" /> Items in this Order ({order.items?.length})
           </h2>
 
           <div className="divide-y divide-slate-100">
             {order.items?.map((item) => (
               <div key={item.id} className="py-4 flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-14 h-14 bg-slate-100 rounded-xl flex items-center justify-center text-slate-400 font-bold text-xs flex-shrink-0">
+                  <div className="w-14 h-14 bg-amber-50/50 border border-amber-200/40 rounded-xl flex items-center justify-center text-amber-900 font-bold text-xs flex-shrink-0">
                     Item
                   </div>
                   <div>
@@ -127,7 +127,7 @@ export const OrderDetailPage: React.FC = () => {
                 </div>
 
                 <div className="text-right">
-                  <span className="text-sm font-bold text-slate-900">
+                  <span className="text-sm font-black text-slate-950">
                     ${(item.priceSnapshot * item.quantity).toFixed(2)}
                   </span>
                   <p className="text-[11px] text-slate-400">${item.priceSnapshot.toFixed(2)} each</p>
@@ -139,9 +139,9 @@ export const OrderDetailPage: React.FC = () => {
 
         {/* Shipping & Payment Summary */}
         <div className="space-y-6">
-          <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm space-y-3">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-indigo-600" /> Shipping Details
+              <MapPin className="w-4 h-4 text-amber-800" /> Shipping Details
             </h3>
             <div className="text-xs text-slate-600 space-y-1">
               <p className="font-semibold text-slate-800">{order.shippingSnapshot?.recipientName}</p>
@@ -155,9 +155,9 @@ export const OrderDetailPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm space-y-3">
+          <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-3">
             <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-              <CreditCard className="w-4 h-4 text-indigo-600" /> Payment Summary
+              <CreditCard className="w-4 h-4 text-amber-800" /> Payment Summary
             </h3>
             <div className="text-xs text-slate-600 space-y-2 pt-1 border-t border-slate-100">
               <div className="flex justify-between">

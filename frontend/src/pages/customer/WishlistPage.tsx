@@ -49,11 +49,11 @@ export const WishlistPage: React.FC = () => {
 
   if (!isAuthenticated) {
     return (
-      <div className="max-w-md mx-auto my-16 text-center bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+      <div className="max-w-md mx-auto my-16 text-center bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
         <Heart className="w-12 h-12 text-rose-500 mx-auto" />
-        <h2 className="text-xl font-bold text-slate-800">Sign in to view your wishlist</h2>
+        <h2 className="text-xl font-bold text-slate-900">Sign in to view your wishlist</h2>
         <p className="text-sm text-slate-500">Keep track of your favorite items across all your devices.</p>
-        <Link to="/login" className="inline-block w-full py-3 bg-indigo-600 text-white rounded-xl font-semibold">
+        <Link to="/login" className="inline-block w-full py-3 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] rounded-xl font-bold shadow-sm transition-all">
           Sign In
         </Link>
       </div>
@@ -74,17 +74,17 @@ export const WishlistPage: React.FC = () => {
           ))}
         </div>
       ) : items.length === 0 ? (
-        <div className="bg-white rounded-3xl border border-slate-100 p-12 text-center space-y-4 shadow-sm">
+        <div className="bg-white rounded-3xl border border-slate-200/80 p-12 text-center space-y-4 shadow-sm">
           <div className="w-16 h-16 rounded-full bg-rose-50 text-rose-500 flex items-center justify-center mx-auto">
             <Heart className="w-8 h-8" />
           </div>
-          <h2 className="text-xl font-bold text-slate-800">Your wishlist is empty</h2>
+          <h2 className="text-xl font-bold text-slate-900">Your wishlist is empty</h2>
           <p className="text-sm text-slate-500 max-w-sm mx-auto">
             Explore our catalog and click the heart icon on any product to save it here.
           </p>
           <Link
             to="/products"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] font-bold rounded-xl shadow-sm transition-all"
           >
             Explore Catalog <ArrowRight className="w-4 h-4" />
           </Link>
@@ -97,12 +97,12 @@ export const WishlistPage: React.FC = () => {
             const price = prod ? prod.discountPrice ?? prod.price : 0;
 
             return (
-              <div key={item.id} className="bg-white rounded-2xl border border-slate-100 overflow-hidden shadow-sm flex flex-col justify-between">
+              <div key={item.id} className="bg-white rounded-2xl border border-slate-200/80 hover:border-[#FFE08B] overflow-hidden shadow-sm flex flex-col justify-between transition-colors">
                 <div className="relative aspect-square bg-slate-100">
                   <img src={img} alt={prod?.name || 'Product'} className="w-full h-full object-cover" />
                   <button
                     onClick={() => handleRemove(item.productId)}
-                    className="absolute top-3 right-3 p-2 rounded-full bg-white/80 backdrop-blur-md text-slate-500 hover:text-rose-600 transition-colors shadow-sm"
+                    className="absolute top-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-md text-slate-500 hover:text-rose-600 transition-colors shadow-sm"
                     title="Remove from wishlist"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -111,15 +111,15 @@ export const WishlistPage: React.FC = () => {
 
                 <div className="p-4 space-y-3">
                   <Link to={`/products/${prod?.slug || prod?.id}`}>
-                    <h3 className="font-semibold text-slate-800 text-sm line-clamp-1 hover:text-indigo-600">
+                    <h3 className="font-semibold text-slate-900 text-sm line-clamp-1 hover:text-amber-800">
                       {prod?.name || 'Product'}
                     </h3>
                   </Link>
-                  <p className="font-bold text-slate-900">${price.toFixed(2)}</p>
+                  <p className="font-extrabold text-slate-950">${price.toFixed(2)}</p>
 
                   <button
                     onClick={() => handleMoveToCart(item.productId)}
-                    className="w-full py-2 bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all"
+                    className="w-full py-2 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 border border-[#F2D070] rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-xs"
                   >
                     <ShoppingBag className="w-4 h-4" /> Move to Cart
                   </button>

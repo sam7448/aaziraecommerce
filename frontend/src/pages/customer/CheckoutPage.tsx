@@ -242,7 +242,7 @@ export const CheckoutPage: React.FC = () => {
               <label
                 className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
                   paymentMethod === 'card'
-                    ? 'border-indigo-600 bg-indigo-50/50'
+                    ? 'border-[#FFE08B] bg-[#FFE08B]/15 shadow-xs'
                     : 'border-slate-200 hover:bg-slate-50'
                 }`}
               >
@@ -253,20 +253,20 @@ export const CheckoutPage: React.FC = () => {
                     value="card"
                     checked={paymentMethod === 'card'}
                     onChange={() => setPaymentMethod('card')}
-                    className="text-indigo-600 focus:ring-indigo-500"
+                    className="text-amber-700 focus:ring-[#FFE08B]"
                   />
                   <div>
                     <p className="text-sm font-bold text-slate-800">Credit / Debit Card (Razorpay)</p>
                     <p className="text-xs text-slate-500">Visa, Mastercard, RuPay, Amex via Razorpay</p>
                   </div>
                 </div>
-                <span className="text-xs font-semibold text-indigo-600">Instant</span>
+                <span className="text-xs font-extrabold text-amber-950 bg-[#FFE08B]/40 border border-[#FFE08B] px-2 py-0.5 rounded-md">Instant</span>
               </label>
 
               <label
                 className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
                   paymentMethod === 'upi'
-                    ? 'border-indigo-600 bg-indigo-50/50'
+                    ? 'border-[#FFE08B] bg-[#FFE08B]/15 shadow-xs'
                     : 'border-slate-200 hover:bg-slate-50'
                 }`}
               >
@@ -277,20 +277,20 @@ export const CheckoutPage: React.FC = () => {
                     value="upi"
                     checked={paymentMethod === 'upi'}
                     onChange={() => setPaymentMethod('upi')}
-                    className="text-indigo-600 focus:ring-indigo-500"
+                    className="text-amber-700 focus:ring-[#FFE08B]"
                   />
                   <div>
                     <p className="text-sm font-bold text-slate-800">UPI / QR Code (Razorpay)</p>
                     <p className="text-xs text-slate-500">Google Pay, PhonePe, Paytm, BHIM via Razorpay</p>
                   </div>
                 </div>
-                <span className="text-xs font-semibold text-indigo-600">Instant</span>
+                <span className="text-xs font-extrabold text-amber-950 bg-[#FFE08B]/40 border border-[#FFE08B] px-2 py-0.5 rounded-md">Instant</span>
               </label>
 
               <label
                 className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-all ${
                   paymentMethod === 'cod'
-                    ? 'border-indigo-600 bg-indigo-50/50'
+                    ? 'border-[#FFE08B] bg-[#FFE08B]/15 shadow-xs'
                     : 'border-slate-200 hover:bg-slate-50'
                 }`}
               >
@@ -301,7 +301,7 @@ export const CheckoutPage: React.FC = () => {
                     value="cod"
                     checked={paymentMethod === 'cod'}
                     onChange={() => setPaymentMethod('cod')}
-                    className="text-indigo-600 focus:ring-indigo-500"
+                    className="text-amber-700 focus:ring-[#FFE08B]"
                   />
                   <div>
                     <p className="text-sm font-bold text-slate-800">Cash on Delivery (COD)</p>
@@ -315,7 +315,7 @@ export const CheckoutPage: React.FC = () => {
         </div>
 
         {/* Right Column: Order Summary & Confirmation */}
-        <div className="bg-white rounded-2xl border border-slate-100 p-6 shadow-sm space-y-6">
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-6">
           <h2 className="text-lg font-bold text-slate-900">Cart Review</h2>
 
           <div className="space-y-3 max-h-56 overflow-y-auto pr-1 divide-y divide-slate-100">
@@ -355,7 +355,7 @@ export const CheckoutPage: React.FC = () => {
           <button
             type="submit"
             disabled={submitting}
-            className="w-full py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-100 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+            className="w-full py-4 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-black rounded-xl shadow-md shadow-amber-200/60 border border-[#F2D070] flex items-center justify-center gap-2 transition-all disabled:opacity-50"
           >
             {submitting ? 'Processing Order...' : `Pay $${total.toFixed(2)} & Place Order`}
           </button>

@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
       <div className="border-b border-slate-800 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left">
           <div className="flex items-center gap-4 justify-center md:justify-start">
-            <div className="p-3 bg-indigo-950 text-indigo-400 rounded-xl">
+            <div className="p-3 bg-[#FFE08B]/15 text-[#FFE08B] border border-[#FFE08B]/20 rounded-xl">
               <Truck className="w-6 h-6" />
             </div>
             <div>
@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4 justify-center md:justify-start">
-            <div className="p-3 bg-indigo-950 text-indigo-400 rounded-xl">
+            <div className="p-3 bg-[#FFE08B]/15 text-[#FFE08B] border border-[#FFE08B]/20 rounded-xl">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <div>
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4 justify-center md:justify-start">
-            <div className="p-3 bg-indigo-950 text-indigo-400 rounded-xl">
+            <div className="p-3 bg-[#FFE08B]/15 text-[#FFE08B] border border-[#FFE08B]/20 rounded-xl">
               <RotateCcw className="w-6 h-6" />
             </div>
             <div>
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4 justify-center md:justify-start">
-            <div className="p-3 bg-indigo-950 text-indigo-400 rounded-xl">
+            <div className="p-3 bg-[#FFE08B]/15 text-[#FFE08B] border border-[#FFE08B]/20 rounded-xl">
               <Headphones className="w-6 h-6" />
             </div>
             <div>
@@ -51,10 +51,10 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 grid grid-cols-1 md:grid-cols-5 gap-8">
         <div className="md:col-span-2 space-y-4">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
-              <ShoppingBag className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-[#FFE08B] text-slate-950 flex items-center justify-center font-black border border-[#F2D070]">
+              <ShoppingBag className="w-5 h-5 text-slate-950" />
             </div>
-            <span className="text-xl font-bold tracking-tight text-white">NovaMarket</span>
+            <span className="text-xl font-extrabold tracking-tight text-white">Nova<span className="text-[#FFE08B]">Market</span></span>
           </Link>
           <p className="text-sm text-slate-400 max-w-sm">
             Your destination for premium electronics, fashion, lifestyle gear, and verified marketplace products with direct seller fulfillment.

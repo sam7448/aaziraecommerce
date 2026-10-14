@@ -46,7 +46,7 @@ export const ForgotPasswordPage: React.FC = () => {
           <div className="pt-4 w-full space-y-2">
             <Link
               to="/login"
-              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-sm transition-colors"
+              className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#FFE08B] hover:bg-[#F3D274] text-slate-950 font-bold border border-[#F2D070] rounded-xl text-sm transition-all shadow-sm"
             >
               Return to Sign In
             </Link>
@@ -56,7 +56,7 @@ export const ForgotPasswordPage: React.FC = () => {
                 setSent(false);
                 setEmail('');
               }}
-              className="w-full text-xs text-slate-500 hover:text-slate-700 py-1"
+              className="w-full text-xs text-slate-500 hover:text-slate-800 py-1"
             >
               Didn't receive an email? Try again
             </button>
@@ -72,7 +72,7 @@ export const ForgotPasswordPage: React.FC = () => {
           )}
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="reset-email" className="text-sm font-medium text-slate-700">
+            <label htmlFor="reset-email" className="text-sm font-semibold text-slate-700">
               Email address
             </label>
             <div className="relative">
@@ -84,7 +84,7 @@ export const ForgotPasswordPage: React.FC = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
                 required
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#FFE08B] focus:border-[#FFE08B] transition"
               />
             </div>
           </div>
@@ -92,16 +92,16 @@ export const ForgotPasswordPage: React.FC = () => {
           <button
             type="submit"
             disabled={loading}
-            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 disabled:bg-indigo-400 text-white font-semibold rounded-xl text-sm transition-colors mt-1"
+            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-[#FFE08B] hover:bg-[#F3D274] disabled:opacity-50 text-slate-950 font-bold border border-[#F2D070] rounded-xl text-sm transition-all shadow-sm mt-1"
           >
-            {loading && <Loader2 className="w-4 h-4 animate-spin" />}
+            {loading && <Loader2 className="w-4 h-4 animate-spin text-slate-950" />}
             {loading ? 'Sending link…' : 'Send Reset Link'}
           </button>
 
           <div className="text-center pt-2">
             <Link
               to="/login"
-              className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-indigo-600 font-medium transition-colors"
+              className="inline-flex items-center gap-1.5 text-sm text-slate-700 hover:text-amber-800 font-bold transition-colors"
             >
               <ArrowLeft className="w-4 h-4" /> Back to Sign In
             </Link>
